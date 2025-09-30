@@ -1,9 +1,11 @@
+html,
 body {
+  height: 100%;
+  margin: 0;
   color: black;
   background-color: whitesmoke;
-}
+} 
 
-.flex-center,
 .center-container,
 .image-row,
 .image-row a,
@@ -27,7 +29,6 @@ body {
 .image-row img {
   width: 100%;
   height: auto;
-  object-fit: contain;
   transition: filter 0.2s ease, transform 0.2s ease;
 }
 
@@ -69,7 +70,6 @@ body {
 .back-link {
   font-size: 1.2em;
   display: inline-block;
-  margin-top: 20px;
   text-decoration: none;
   color: black;
   transition: color 0.2s ease;
@@ -86,13 +86,6 @@ body {
   z-index: 10;
 }
 
-/* Make sure the viewport has full height and no default body margins */
-html,
-body {
-  height: 100%;
-  margin: 0;
-}
-
 /* The wrapper is the scroll container */
 .snap-root {
   height: 100vh;                 
@@ -107,10 +100,6 @@ body {
   min-height: 100vh;             
   padding: 20px;
   box-sizing: border-box;
-  scroll-snap-align: start;
-}
-
-.snap-slide {
   scroll-snap-align: start;
 }
 
@@ -131,7 +120,6 @@ body {
 
 .scroll-image {
   max-width: 30vw;
-  height: auto;
 }
 
 .ingredient-list {
