@@ -6,7 +6,6 @@ body {
   background-color: whitesmoke;
 } 
 
-.center-container,
 .image-row,
 .image-row a,
 .page-section {
@@ -86,7 +85,6 @@ body {
   z-index: 10;
 }
 
-/* The wrapper is the scroll container */
 .snap-root {
   height: 100vh;                 
   overflow-y: scroll;
@@ -95,7 +93,6 @@ body {
   overscroll-behavior-y: contain;
 }
 
-/* Each slide fills the viewport and snaps to the top */
 .page-section {
   min-height: 100vh;             
   padding: 20px;
@@ -133,4 +130,23 @@ body {
 
 .ingredient-list li+li {
   margin-top: 4px;
+}
+
+/* Web ring button */
+.next-page-link {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 50;
+}
+
+.next-page-img {
+  width: 60px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.next-page-img:hover {
+  transform: scale(1.1);
 }
