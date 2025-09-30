@@ -36,7 +36,7 @@ body {
   transform: scale(1.03);
 }
 
-/* Fonts grouped */
+/* Fonts */
 .image-row-label,
 .page-container h1,
 .page-container p,
@@ -74,12 +74,51 @@ body {
   color: black;
   transition: color 0.2s ease;
 }
-.back-link:hover { color: gray; }
-.back-link-fixed { position: fixed; top: 16px; left: 16px; z-index: 10; }
 
-.snap-root { scroll-snap-type: y mandatory; overflow-y: scroll; }
-.page-section { height: 100vh; padding: 20px; box-sizing: border-box; }
-.snap-slide { scroll-snap-align: start; }
+.back-link:hover {
+  color: gray;
+}
+
+.back-link-fixed {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 10;
+}
+
+/* Make sure the viewport has full height and no default body margins */
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+/* The wrapper is the scroll container */
+.snap-root {
+  height: 100vh;
+  /* fills the viewport */
+  overflow-y: auto;
+  /* this element scrolls */
+  scroll-snap-type: y mandatory;
+}
+
+/* Each slide fills the viewport and snaps to the top */
+.page-section {
+  height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  scroll-snap-align: start;
+}
+
+.page-section {
+  height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.snap-slide {
+  scroll-snap-align: start;
+}
 
 .slide-grid {
   display: grid;
@@ -109,4 +148,7 @@ body {
   margin: 0;
   text-align: left;
 }
-.ingredient-list li + li { margin-top: 4px; }
+
+.ingredient-list li+li {
+  margin-top: 4px;
+}
