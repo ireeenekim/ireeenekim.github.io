@@ -95,25 +95,19 @@ body {
 
 /* The wrapper is the scroll container */
 .snap-root {
-  height: 100vh;
-  /* fills the viewport */
-  overflow-y: auto;
-  /* this element scrolls */
+  height: 100vh;                 
+  overflow-y: scroll;
   scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  overscroll-behavior-y: contain;
 }
 
 /* Each slide fills the viewport and snaps to the top */
 .page-section {
-  height: 100vh;
+  min-height: 100vh;             
   padding: 20px;
   box-sizing: border-box;
   scroll-snap-align: start;
-}
-
-.page-section {
-  height: 100vh;
-  padding: 20px;
-  box-sizing: border-box;
 }
 
 .snap-slide {
