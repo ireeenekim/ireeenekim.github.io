@@ -142,7 +142,7 @@ body {
 
 .next-page-img {
   width: 60px;
-  height: auto;
+  height: 60px;
   cursor: pointer;
   transition: transform 0.2s ease;
 }
