@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>gestalt's principles</title>
+
+    <meta name="description"
+        content="A single interactive page demonstrating five Gestalt principles through hover effects: closure, continuity, figure/ground, Prägnanz, and similarity.">
+    <link rel="stylesheet" href="style1.css" />
+</head>
+
+<body>
+    <p class="image-row-label">gestalt principles</p>
+
+    <div class="image-row">
+        <!-- Closure -->
+        <div class="image-hover effect-crossfade" title="Gestalt Principle: Closure">
+            <img src="images/closure1.png" alt="Closure: incomplete form where the mind fills in missing edges"
+                class="base" />
+            <img src="images/closure2.png" alt="Closure: completed square appearing after hover" class="hover" />
+        </div>
+
+        <!-- Continuity -->
+        <div class="image-hover effect-overlay" title="Gestalt Principle: Continuity">
+            <img src="images/cont1.png" alt="Continuity: two continuous, intersecting lines" class="base" />
+            <img src="images/cont2.png" alt="Continuity: two non-continuous sideways v's" class="hover" />
+        </div>
+
+        <!-- Figure/Ground -->
+        <div class="image-hover effect-crossfade" title="Gestalt Principle: Figure/Ground">
+            <img src="images/fg1.png" alt="Figure/Ground: a vase" class="base" />
+            <img src="images/fg2.png" alt="Figure/Ground: two faces"
+                class="hover" />
+        </div>
+
+        <!-- Prägnanz -->
+        <div class="image-hover effect-crossfade" title="Gestalt Principle: Prägnanz">
+            <img src="images/ring1.png" alt="Prägnanz: 5 interlocked circles or olympic rings" class="base" />
+            <img src="images/ring2.png" alt="Prägnanz: one large, complex outline" class="hover" />
+        </div>
+
+        <!-- Similarity -->
+        <div class="image-hover effect-crossfade" title="Gestalt Principle: Similarity">
+            <img src="images/sim1.png" alt="Similarity: one grid of triangles and squares" class="base" />
+            <img src="images/sim2.png" alt="Similarity: two grids, one grid of triangles and one grid of squares"
+                class="hover" />
+        </div>
+    </div>
+</body>
+
+</html>
