@@ -17,32 +17,27 @@ body {
 
 .image-column {
   display: flex;
-  flex-direction: column;   /* <-- vertical */
-  align-items: center;      /* center tiles */
-  gap: 20px;                /* space between tiles */
+  flex-direction: column;
+  align-items: center;     
+  gap: 20px;             
   padding: 16px;
-  max-width: 500px;        /* container width for big screens */
+  max-width: 480px;       
   margin: 0 auto;
 }
 
-/* Each tile fills a comfortable width and stays square */
 .image-hover {
   position: relative;
-  width: min(70vw, 480px);  /* smaller than before */
-  aspect-ratio: 1 / 1;      /* keep square */
+  width: min(50vw, 480px);
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   transition: transform 0.8s ease-in-out;
   cursor: pointer;
 }
 
-/* Subtle zoom on hover (kept from your original) */
 .image-hover:hover {
-  transform: scale(1.02);
+  transform: scale(1.15);
 }
 
-/* ===========================
-   Image Stacking & Effects
-=========================== */
 .image-hover .base,
 .image-hover .hover {
   position: absolute;
@@ -64,30 +59,3 @@ body {
 .effect-overlay .base { opacity: 1; }
 .effect-overlay .hover { opacity: 0; }
 .effect-overlay:hover .hover { opacity: 1; }
-
-/* ===========================
-   Responsive Adjustments
-   (keeps 3+ breakpoints)
-=========================== */
-@media (max-width: 1200px) {
-  .image-hover { width: min(90vw, 640px); }
-}
-
-@media (max-width: 900px) {
-  .image-hover { width: min(92vw, 560px); }
-  .image-column { gap: 18px; }
-}
-
-@media (max-width: 600px) {
-  .image-hover { width: 94vw; }  /* nearly full-width on phones */
-  .image-column-label { font-size: clamp(1.2rem, 6vw, 1.6rem); }
-}
-
-@media (max-width: 420px) {
-  .image-hover { width: 96vw; }  /* edge-to-edge on small phones */
-}
-
-/* Respect reduced motion preference */
-@media (prefers-reduced-motion: reduce) {
-  * { transition: none !important; }
-}
