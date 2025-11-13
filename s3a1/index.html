@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>glitch script generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="page">
+        <header class="header">
+            <h1>follow the instructions</h1>
+            <p class="subtitle">
+                just follow the instructions
+            </p>
+
+            <div class="controls">
+                <button id="startBtn" class="btn primary">start</button>
+                <button id="stopBtn" class="btn" disabled>stop</button>
+                <button id="resetBtn" class="btn">reset log</button>
+            </div>
+        </header>
+
+        <main class="main">
+            <section class="block">
+                <div class="label">current instruction</div>
+                <div id="current" class="current-text">
+                    instructions will appear here when you press <span class="mono">start</span>.
+                </div>
+
+                <div id="typingArea" class="typing">
+                    <label for="typeInput">type here:</label>
+                    <input id="typeInput" type="text" autocomplete="off" />
+                </div>
+            </section>
+
+            <section class="block">
+                <div class="label">log</div>
+                <div id="log" class="log">
+                    [system] ready. press start to begin.
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
