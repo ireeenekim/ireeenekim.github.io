@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rise & Vibe | Kill the Alarm</title>
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
     <nav>
@@ -21,8 +24,10 @@
     <section class="hero">
         <div class="content-wrapper">
             <h1>KILL THE <span class="highlight">ALARM</span>.</h1>
-            <p>Your Mondays need a soundtrack, not a siren. Start your week with a song that actually gets you out of bed.</p>
-            <a href="https://ift.tt/C0Yoq9A" target="_blank" class="cta-button">Get the Applet</a>
+            <p>Your Mondays need a soundtrack, not a siren. Start your week with a song that actually gets you out of
+                bed.</p>
+            <a href="https://urldefense.com/v3/__https://ift.tt/C0Yoq9A__;!!IBzWLUs!XOGOVmVihgbRoIdvs51PPduJcOJeGhUlaHpnFv28JpMD8MwXnVUbqM-LaFWiVNo74DIs9tJA8w2yElBdeVYkLtM$"
+                target="_blank" class="cta-button">Get the Applet</a>
         </div>
     </section>
 
@@ -52,21 +57,34 @@
     <section class="vibe-section">
         <div class="content-wrapper">
             <h2>CHOOSE YOUR <span class="highlight">VIBE</span></h2>
-            <p class="section-subtitle">Connect any song. From lo-fi beats to high-energy pop.</p>
-            
+            <p class="section-subtitle">Click an album to preview the vibe.</p>
+
             <div class="album-grid">
-                <div class="album-card">
-                    <div class="album-cover" style="background-image: url('https://images.unsplash.com/photo-1493225255756-d9584f8606e9?w=500&auto=format&fit=crop');"></div>
-                    <p>Morning Hype</p>
+                
+                <div class="album-card" onclick="togglePlay('audio-1', this)">
+                    <div class="album-cover" style="background-image: url('images/wham.jpg');">
+                        <div class="play-overlay"><i class="fa-solid fa-play"></i></div>
+                    </div>
+                    <p>Wake Me Up Before You Go-Go</p>
+                    <audio id="audio-1" src="audio/wham.mp3"></audio>
                 </div>
-                <div class="album-card">
-                    <div class="album-cover" style="background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=500&auto=format&fit=crop');"></div>
-                    <p>Synthwave Run</p>
+
+                <div class="album-card" onclick="togglePlay('audio-2', this)">
+                    <div class="album-cover" style="background-image: url('images/sza.jpg');">
+                        <div class="play-overlay"><i class="fa-solid fa-play"></i></div>
+                    </div>
+                    <p>Snooze</p>
+                    <audio id="audio-2" src="audio/sza.mp3"></audio>
                 </div>
-                <div class="album-card">
-                    <div class="album-cover" style="background-image: url('https://images.unsplash.com/photo-1514924013411-cbf25faa35ad?w=500&auto=format&fit=crop');"></div>
-                    <p>Indie Wake Up</p>
+
+                <div class="album-card" onclick="togglePlay('audio-3', this)">
+                    <div class="album-cover" style="background-image: url('images/unwritten.jpg');">
+                        <div class="play-overlay"><i class="fa-solid fa-play"></i></div>
+                    </div>
+                    <p>Unwritten</p>
+                    <audio id="audio-3" src="audio/unwritten.mp3"></audio>
                 </div>
+
             </div>
         </div>
     </section>
@@ -85,14 +103,28 @@
                     <p>"The standard iPhone alarm gives me anxiety. This gives me life."</p>
                     <span>- Mike T.</span>
                 </div>
+                <div class="review-card">
+                    <p class="stars">★★★★★</p>
+                    <p>"I can look forward to the week now. Mondays have never felt better."</p>
+                    <span>- Gloria S.</span>
+                </div>
+                <div class="review-card">
+                    <p class="stars">★★★★★</p>
+                    <p>"I reccomend this to anyone who needs an extra boost to start the week."</p>
+                    <span>- Benjamin F.</span>
+                </div>
+
             </div>
-            
+
             <div class="final-cta">
-                <a href="https://ift.tt/C0Yoq9A" target="_blank" class="cta-button small-btn">Install Now</a>
+                <a href="https://urldefense.com/v3/__https://ift.tt/C0Yoq9A__;!!IBzWLUs!XOGOVmVihgbRoIdvs51PPduJcOJeGhUlaHpnFv28JpMD8MwXnVUbqM-LaFWiVNo74DIs9tJA8w2yElBdeVYkLtM$"
+                    target="_blank" class="cta-button small-btn">Install Now</a>
                 <p class="copyright">&copy; 2025 Rise & Vibe.</p>
             </div>
         </div>
     </section>
 
+    <script src="script.js"></script>
 </body>
+
 </html>
