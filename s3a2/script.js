@@ -18,7 +18,7 @@ function togglePlay(audioId, cardElement) {
             icon.classList.remove('fa-pause');
             icon.classList.add('fa-play');
         }
-    } 
+    }
     // 2. If we clicked a NEW song
     else {
         // Stop the old one if it exists
@@ -35,8 +35,6 @@ function togglePlay(audioId, cardElement) {
         // Play the new one
         currentAudio = mediaElement;
         currentCard = cardElement;
-        
-        // This works for both <audio> and <video> tags
         mediaElement.play().catch(error => {
             console.log("Playback failed (user interactions required):", error);
         });
