@@ -1,0 +1,101 @@
+/* 1. ORIGINAL FONT & CURSOR SETUP */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    overflow: hidden;
+    /* Retro Font */
+    font-family: 'Courier New', Courier, monospace; 
+    /* Hide default cursor */
+    cursor: none; 
+  }
+  
+  canvas {
+    display: block;
+    position: absolute;
+    top: 0; left: 0; z-index: -1;
+  }
+  
+  /* 2. SCOREBOARD STYLING */
+  #score-board {
+    position: absolute;
+    top: 20px; left: 20px;
+    color: #00ffcc;
+    font-size: 24px; font-weight: bold;
+    z-index: 10;
+    /* Allow hover interaction */
+    pointer-events: auto; 
+    transition: transform 0.3s;
+    text-shadow: 0 0 10px #00ffcc;
+  }
+  
+  #score-board:hover {
+    transform: scale(1.1);
+    cursor: none;
+  }
+  
+  /* 3. OVERLAY STYLING */
+  #overlay {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    z-index: 20;
+    /* Ignore clicks on the box background, allow clicks to pass through */
+    pointer-events: none; 
+    transition: opacity 0.3s;
+  }
+  
+  #status-text {
+    margin: 0;
+    font-size: 50px;
+    letter-spacing: 2px;
+    color: #fff;
+    text-shadow: 0 0 20px #00ffcc, 0 0 40px #00ffcc;
+  }
+  
+  #sub-text {
+    font-size: 20px;
+    color: #bbb;
+    margin-top: 10px;
+  }
+  
+  /* 4. BUTTON STYLING & PSEUDO-CLASSES */
+  #start-btn {
+    /* Crucial: Re-enable pointer events for the button so we can click it */
+    pointer-events: auto; 
+    
+    margin-top: 30px;
+    background: transparent;
+    border: 2px solid #00ffcc;
+    color: #00ffcc;
+    padding: 15px 40px;
+    font-family: inherit; /* Inherits Courier New */
+    font-size: 18px;
+    font-weight: bold;
+    cursor: none; /* Keep the custom cursor */
+    transition: all 0.1s;
+    
+    /* Initial Glow */
+    box-shadow: 0 0 10px rgba(0, 255, 204, 0.2);
+  }
+  
+  /* :hover - Glow brighter */
+  #start-btn:hover {
+    background-color: rgba(0, 255, 204, 0.1);
+    box-shadow: 0 0 20px #00ffcc;
+    text-shadow: 0 0 8px #00ffcc;
+  }
+  
+  /* :active - The Tactile Effect (Moves down) */
+  #start-btn:active {
+    transform: translateY(4px); 
+    box-shadow: 0 0 5px #00ffcc; 
+  }
+  
+  /* Utility to hide menu */
+  .hidden {
+    opacity: 0;
+    pointer-events: none !important; 
+  }
