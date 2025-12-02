@@ -1,10 +1,8 @@
-/* 1. ORIGINAL FONT & CURSOR SETUP */
 body {
     margin: 0;
     padding: 0;
     background-color: #000;
     overflow: hidden;
-    /* Retro Font */
     font-family: 'Courier New', Courier, monospace; 
     /* Hide default cursor */
     cursor: none; 
@@ -63,21 +61,20 @@ body {
   
   /* 4. BUTTON STYLING & PSEUDO-CLASSES */
   #start-btn {
-    /* Crucial: Re-enable pointer events for the button so we can click it */
+    /* Re-enable pointer events for the button so we can click it */
     pointer-events: auto; 
-    
+
     margin-top: 30px;
     background: transparent;
     border: 2px solid #00ffcc;
     color: #00ffcc;
     padding: 15px 40px;
-    font-family: inherit; /* Inherits Courier New */
+    font-family: inherit;
     font-size: 18px;
     font-weight: bold;
     cursor: none; /* Keep the custom cursor */
     transition: all 0.1s;
     
-    /* Initial Glow */
     box-shadow: 0 0 10px rgba(0, 255, 204, 0.2);
   }
   
@@ -88,13 +85,13 @@ body {
     text-shadow: 0 0 8px #00ffcc;
   }
   
-  /* :active - The Tactile Effect (Moves down) */
+  /* :active - Tactile Effect (moves down) */
   #start-btn:active {
     transform: translateY(4px); 
     box-shadow: 0 0 5px #00ffcc; 
   }
   
-  /* Utility to hide menu */
+  /* Hide menu */
   .hidden {
     opacity: 0;
     pointer-events: none !important; 
