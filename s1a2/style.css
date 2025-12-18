@@ -1,0 +1,244 @@
+.shape { 
+    box-sizing: border-box; 
+  }
+  
+  #wrapper {
+    position: relative;
+    width: 800px;
+    height: 600px;
+    background-image: url("https://t4.ftcdn.net/jpg/02/23/06/05/360_F_223060577_Up871tVFzW9s3J5y6ILNQnDiPeOOsBTC.jpg");
+    background-position: center;
+    overflow: hidden;
+  }
+  
+  #brownbox {
+    background-color: #876940;
+    position: absolute;
+    width: 300px;
+    height: 230px;
+    margin-top: 100px;
+    margin-left: 250px;
+    box-shadow: 2px 4px 8px rgba(0,0,0,.3);
+    border-radius: 3px;
+  }
+  
+  #whitebox {
+    transform: rotate(-30deg);
+    background-color: #faf8f0;
+    position: absolute;
+    width: 270px;
+    height: 210px;
+    box-shadow: 2px 4px 6px rgba(0,0,0,.25);
+    border-radius: 3px;
+  }
+  
+  #whiteboxsquare {
+    background-color: #f0ebeb;
+    position: absolute;
+    width: 60px;
+    height: 150px;
+    margin-left: 50px;
+    margin-top: 30px;
+    border: 5px solid gray;
+  }
+  
+  #bottomred {
+    transform: rotate(-10deg);
+    background-color: #a92b1f;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    margin-top: 20px;
+    margin-left: 50px;
+    box-shadow: 1px 3px 6px rgba(0,0,0,.35);
+  }
+  
+  #topred {
+    transform: rotate(20deg);
+    background-color: #d2392f;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    margin-top: 0px;
+    margin-left: 10px;
+    box-shadow: 1px 3px 6px rgba(0,0,0,.35);
+  }
+  
+  #caloriemate {
+    transform: rotate(10deg);
+    background-color: #f9b900;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    box-shadow: 1px 2px 4px rgba(0,0,0,.25);
+  }
+  
+  #caloriemate #title {
+    font-family: cursive;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 5px;
+  }
+  
+  #caloriemate #body {
+    font-family: arial;
+    font-size: 5px;
+    text-align: justify;
+    margin-left: 4px;
+    margin-right: 4px;
+    color: #d2392f;
+  }
+  
+  #browncircle {
+    width: 50px;
+    height: 50px;
+    margin-top: 45px;
+    margin-left: 165px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #a76b2a 0%, #472d0b 100%);
+    box-shadow: inset 0 2px 4px rgba(255,255,255,.3),
+      2px 3px 6px rgba(0,0,0,.4);
+  }
+  
+  #whitecircle {
+    background-color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    transform: translate(35%, 30%);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.15),
+      1px 2px 4px rgba(0,0,0,.25);
+  }
+  
+  #blueoval {
+    background-color: navy;
+    width: 25px;
+    height: 15px;
+    border-radius: 50%;
+    transform: translate(10%, 50%);
+  }
+  
+  #blackrect {
+    background-color: black;
+    position: absolute;
+    width: 100px;
+    height: 20px;
+    margin-top: 115px;
+    margin-left: 171px;
+  }
+  
+  #grayparallel {
+    background: #32332d;
+    width: 100px;
+    height: 30px;
+    transform: skew(-20deg);
+    margin-top: 135px;
+    margin-left: 165px;
+  }
+  
+  #grayparallel2 {
+    position: absolute;
+    top: 210px;
+    left: 171px;
+    width: 7px;
+    height: 32px;
+    background: gray;
+    transform-origin: top left;
+    transform: rotate(20deg) skewY(70deg);
+  }
+  
+  #yellowsquare {
+    transform: rotate(-20deg);
+    background-color: #ece14f;
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    margin-top: 400px;
+    margin-left: -30px;
+    box-shadow: 3px 4px 8px rgba(0,0,0,.35);
+  }
+  
+  #whitebook {
+    background-color: white;
+    width: 150px;
+    height: 150px;
+    margin-top: 25px;
+    margin-left: 25px;
+    border: 1px solid blue;
+  }
+  
+  #deck {
+    position: absolute;
+    top: 70px;    
+    left: 300px;   
+    width: 320px;
+    height: 160px;
+    isolation: isolate;
+  }
+  
+  #deck .card {
+    position: absolute;
+    width: 60px;
+    height: 90px;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 4px 10px rgba(0,0,0,.15);
+    transform-origin: 20px 110px;
+    z-index: 0;
+    --r: 0deg;
+    --lift: 0px;
+    transform: translateY(var(--lift)) rotate(var(--r));
+    transition: transform 160ms ease, box-shadow 160ms ease, z-index 0s;
+  }
+  
+  #deck .card .label {
+    position: absolute;
+    top: 6px;
+    left: 8px;
+    font: 700 16px/1 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+    color: #222;
+  }
+  
+  #deck .card:hover {
+    z-index: 10;
+    --lift: -8px;
+    box-shadow: 0 10px 18px rgba(0,0,0,.28);
+  }
+  
+  #deck .card.red .label { color: #cc1e1e; }
+  
+  #deck .card:nth-child(1) { left: 0px;   transform: rotate(-14deg); }
+  #deck .card:nth-child(2) { left: 24px;  transform: rotate(-10deg); }
+  #deck .card:nth-child(3) { left: 48px;  transform: rotate(-6deg);  }
+  #deck .card:nth-child(4) { left: 72px;  transform: rotate(-2deg);  }
+  #deck .card:nth-child(5) { left: 96px;  transform: rotate(2deg);   }
+  #deck .card:nth-child(6) { left: 120px; transform: rotate(6deg);   }
+  #deck .card:nth-child(7) { left: 144px; transform: rotate(10deg);  }
+  
+  #wheel-wrap {
+    position: absolute; top: 40px; left: 40px;
+    width: 150px; height: 150px;
+    animation: spin 8s linear infinite;
+    display: inline-block;
+  }
+  
+  #colorwheel {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    width: 150px;
+    height: auto;
+    --spin-duration: 8s;
+    transform-origin: center;
+    animation: spin var(--spin-duration) linear infinite;
+  }
+  
+  #colorwheel:hover,
+  #colorwheel:focus-visible {
+    --spin-duration: 2s; /* faster while hovered */
+  }
+  
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
