@@ -1,10 +1,3 @@
-/* -----------------------------------------------------------
-   INSTRUCTIONS LIST
-   Each instruction has:
-     - text: displayed message
-     - trigger: the type of user action required
-     - target: (optional) required text for "word" prompts
------------------------------------------------------------ */
 const instructions = [
   { text: 'click anywhere on this page (not the buttons).', trigger: 'click' },
   { text: 'scroll as if you are looking for something that is not here.', trigger: 'scroll' },
@@ -42,42 +35,31 @@ const instructions = [
   { text: 'DOUBLE the confusion();', trigger: 'timer' }
 ];
 
-/* -----------------------------------------------------------
-   RUNTIME STATE
------------------------------------------------------------ */
+// Runtime state
 let isRunning = false;
 let lastInstruction = null;
 let currentListenerCleanup = null;
 let scrollSpacer = null;
 let moveTracker = null; // tracks movement distance
 
-/* -----------------------------------------------------------
-   GRAB REQUIRED DOM ELEMENTS
------------------------------------------------------------ */
-const currentEl   = document.getElementById('current');
-const logEl       = document.getElementById('log');
-const statusText  = document.getElementById('statusText');
-const startBtn    = document.getElementById('startBtn');
-const stopBtn     = document.getElementById('stopBtn');
-const resetBtn    = document.getElementById('resetBtn');
-const typingArea  = document.getElementById('typingArea');
-const typeInput   = document.getElementById('typeInput');
+// Grab required DOM elements
+const currentEl = document.getElementById('current');
+const logEl = document.getElementById('log');
+const statusText = document.getElementById('statusText');
+const startBtn = document.getElementById('startBtn');
+const stopBtn = document.getElementById('stopBtn');
+const resetBtn = document.getElementById('resetBtn');
+const typingArea = document.getElementById('typingArea');
+const typeInput = document.getElementById('typeInput');
 
-/* -----------------------------------------------------------
-   LOGGING FUNCTION
-   Appends a timestamped line into the script
------------------------------------------------------------ */
+// Timestamp
 function log(message) {
   const time = new Date().toLocaleTimeString();
   logEl.textContent += '\n[' + time + '] ' + message;
   logEl.scrollTop = logEl.scrollHeight;
 }
 
-/* -----------------------------------------------------------
-   INSTRUCTION PICKER
-   Returns a new random instruction.
-   Small chance of repeating previous instruction.
------------------------------------------------------------ */
+// Picking random instruction (12% chance of repeating previous instruction)
 function randomInstruction() {
   const repeatChance = 0.12;
   if (lastInstruction && Math.random() < repeatChance) {
@@ -87,10 +69,7 @@ function randomInstruction() {
   return instructions[index];
 }
 
-/* -----------------------------------------------------------
-   CLEAR ANY ACTIVE TRIGGERS
-   Removes event listeners or scroll helpers
------------------------------------------------------------ */
+// Clear active triggers
 function clearCurrentTrigger() {
   if (currentListenerCleanup) {
     currentListenerCleanup();
@@ -103,23 +82,21 @@ function clearCurrentTrigger() {
   moveTracker = null;
 }
 
-/* Hide typing box */
+// Hide typing box
 function hideTypingBox() {
   typingArea.style.display = 'none';
   typeInput.value = '';
 }
 
-/* -----------------------------------------------------------
-   SET TRIGGER FOR A GIVEN INSTRUCTION
-   Creates the event listeners or timed waits required
------------------------------------------------------------ */
+// Set trigger for a given instruction
+// Creates the event listeners or timed waits
 function setTriggerForInstruction(instr) {
   clearCurrentTrigger();
   hideTypingBox();
 
   if (!instr || !instr.trigger) return;
 
-  /* --- CLICK TRIGGER -------------------------------------- */
+  // Click
   if (instr.trigger === 'click') {
     const handler = e => {
       const tag = e.target.tagName.toLowerCase();
@@ -130,7 +107,7 @@ function setTriggerForInstruction(instr) {
     document.addEventListener('click', handler);
     currentListenerCleanup = () => document.removeEventListener('click', handler);
 
-  /* --- SCROLL TRIGGER ------------ */
+  // Scroll
   } else if (instr.trigger === 'scroll') {
     scrollSpacer = document.createElement('div');
     scrollSpacer.style.height = '2000px';
@@ -147,7 +124,7 @@ function setTriggerForInstruction(instr) {
     window.addEventListener('scroll', handler);
     currentListenerCleanup = () => window.removeEventListener('scroll', handler);
 
-  /* --- KEY PRESS TRIGGER ---------------------------------- */
+    // Key press
   } else if (instr.trigger === 'key') {
     const handler = event => {
       if (event.target === typeInput) return; // ignore typing input
@@ -157,7 +134,7 @@ function setTriggerForInstruction(instr) {
     document.addEventListener('keydown', handler, { once: true });
     currentListenerCleanup = () => document.removeEventListener('keydown', handler);
 
-  /* --- MOUSE MOVE TRIGGER --------------------------------- */
+    // Mouse
   } else if (instr.trigger === 'move') {
     const threshold = 300; // how far user must move mouse
     moveTracker = { lastX: null, lastY: null, totalDistance: 0 };
@@ -176,7 +153,7 @@ function setTriggerForInstruction(instr) {
 
       const dx = x - moveTracker.lastX;
       const dy = y - moveTracker.lastY;
-      const dist = Math.sqrt(dx*dx + dy*dy);
+      const dist = Math.sqrt(dx * dx + dy * dy);
 
       moveTracker.totalDistance += dist;
       moveTracker.lastX = x;
@@ -188,7 +165,7 @@ function setTriggerForInstruction(instr) {
     document.addEventListener('mousemove', handler);
     currentListenerCleanup = () => document.removeEventListener('mousemove', handler);
 
-  /* --- TIMER TRIGGER -------------------------------------- */
+    // Timer
   } else if (instr.trigger === 'timer') {
     const id = setTimeout(() => {
       if (!isRunning) return;
@@ -196,7 +173,7 @@ function setTriggerForInstruction(instr) {
     }, 2000);
     currentListenerCleanup = () => clearTimeout(id);
 
-  /* --- WORD TRIGGER ------------------ */
+    // Word
   } else if (instr.trigger === 'word') {
     typingArea.style.display = 'flex';
     typeInput.value = '';
@@ -214,9 +191,7 @@ function setTriggerForInstruction(instr) {
   }
 }
 
-/* -----------------------------------------------------------
-   DISPLAY AND START NEXT INSTRUCTION
------------------------------------------------------------ */
+// Display and start next instruction
 function showNextInstruction() {
   if (!isRunning) return;
 
@@ -229,9 +204,7 @@ function showNextInstruction() {
   setTriggerForInstruction(instr);
 }
 
-/* -----------------------------------------------------------
-   CONTROL BUTTONS
------------------------------------------------------------ */
+// Control buttons
 function startGenerator() {
   if (isRunning) return;
   isRunning = true;
@@ -258,9 +231,7 @@ function resetLog() {
   lastInstruction = null;
 }
 
-/* -----------------------------------------------------------
-   BUTTON EVENT LISTENERS
------------------------------------------------------------ */
+// Button event listeners
 startBtn.addEventListener('click', startGenerator);
 stopBtn.addEventListener('click', stopGenerator);
 resetBtn.addEventListener('click', resetLog);

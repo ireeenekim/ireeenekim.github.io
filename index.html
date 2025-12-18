@@ -28,80 +28,113 @@
             </nav>
         </header>
 
-        <section class="bio">
-            <p>
-                BORN IN [YEAR]. BASED IN [LOCATION].<br>
-                EXPLORING THE INTERSECTION OF DESIGN, TECHNOLOGY,<br>
-                AND INTERACTIVE MEDIA.
-            </p>
-        </section>
-
-        <section id="projects" class="project-list">
+        <div class="main-layout">
             
-            <div class="list-row">
-                <a href="./s3fp/index.html">
-                    <span class="p-title">SEMESTER 3 FINAL PROJECT</span>
-                    <span class="p-meta">DEV / DESIGN / S3FP</span>
-                </a>
-            </div>
-            <div class="list-row">
-                <a href="./s3a2/index.html">
-                    <span class="p-title">ASSIGNMENT 3.2</span>
-                    <span class="p-meta">EXPERIMENT / S3A2</span>
-                </a>
-            </div>
-            <div class="list-row">
-                <a href="./s3a1/index.html">
-                    <span class="p-title">ASSIGNMENT 3.1</span>
-                    <span class="p-meta">PROTOTYPE / S3A1</span>
-                </a>
+            <div class="col-left">
+                <div class="bio">
+                    <p>
+                        BASED IN PHILADELPHIA.<br>
+                        STUDENT AT UPENN.<br>
+                        EXPLORING THE INTERSECTION OF PSYCHOLOGY, CS,
+                        AND INTERACTIVE MEDIA.
+                    </p>
+                </div>
+
+                <div id="preview-container">
+                    <img id="project-preview" src="" alt="Project Preview">
+                </div>
             </div>
 
-            <div class="separator"></div>
+            <div class="col-right">
+                <section id="projects" class="project-list">
+                    
+                    <div class="list-row">
+                        <a href="./s3fp/index.html" data-img="https://placehold.co/600x400/111/fff?text=S3+Final">
+                            <span class="p-title">SEMESTER 3 FINAL</span>
+                            <span class="p-meta">DEV / DESIGN</span>
+                        </a>
+                    </div>
+                    <div class="list-row">
+                        <a href="./s3a2/index.html" data-img="https://placehold.co/600x400/222/fff?text=Assignment+3.2">
+                            <span class="p-title">ASSIGNMENT 3.2</span>
+                            <span class="p-meta">EXPERIMENT</span>
+                        </a>
+                    </div>
+                    <div class="list-row">
+                        <a href="./s3a1/index.html" data-img="https://placehold.co/600x400/333/fff?text=Assignment+3.1">
+                            <span class="p-title">ASSIGNMENT 3.1</span>
+                            <span class="p-meta">PROTOTYPE</span>
+                        </a>
+                    </div>
 
-            <div class="list-row">
-                <a href="./s2fp/index.html">
-                    <span class="p-title">SEMESTER 2 FINAL PROJECT</span>
-                    <span class="p-meta">DEV / DESIGN / S2FP</span>
-                </a>
-            </div>
-            <div class="list-row">
-                <a href="./s2a2/index.html">
-                    <span class="p-title">ASSIGNMENT 2.2</span>
-                    <span class="p-meta">GRAPHIC / S2A2</span>
-                </a>
-            </div>
+                    <div class="separator"></div>
 
-            <div class="separator"></div>
+                    <div class="list-row">
+                        <a href="./s2fp/index.html" data-img="https://placehold.co/600x400/444/fff?text=S2+Final">
+                            <span class="p-title">SEMESTER 2 FINAL</span>
+                            <span class="p-meta">DEV / DESIGN</span>
+                        </a>
+                    </div>
+                    <div class="list-row">
+                        <a href="./s2a2/index.html" data-img="https://placehold.co/600x400/555/fff?text=Assignment+2.2">
+                            <span class="p-title">ASSIGNMENT 2.2</span>
+                            <span class="p-meta">GRAPHIC</span>
+                        </a>
+                    </div>
 
-            <div class="list-row">
-                <a href="./s1fp/index.html">
-                    <span class="p-title">SEMESTER 1 FINAL PROJECT</span>
-                    <span class="p-meta">ARCHIVE / S1FP</span>
-                </a>
-            </div>
-            <div class="list-row">
-                <a href="./s1a2/index.html">
-                    <span class="p-title">ASSIGNMENT 1.2</span>
-                    <span class="p-meta">WEB / S1A2</span>
-                </a>
-            </div>
-            <div class="list-row">
-                <a href="./s1a1/index.html">
-                    <span class="p-title">ASSIGNMENT 1.1</span>
-                    <span class="p-meta">WEB / S1A1</span>
-                </a>
-            </div>
+                    <div class="separator"></div>
 
-        </section>
+                    <div class="list-row">
+                        <a href="./s1fp/index.html" data-img="https://placehold.co/600x400/666/fff?text=S1+Final">
+                            <span class="p-title">SEMESTER 1 FINAL</span>
+                            <span class="p-meta">ARCHIVE</span>
+                        </a>
+                    </div>
+                    <div class="list-row">
+                        <a href="./s1a2/index.html" data-img="https://placehold.co/600x400/777/fff?text=Assignment+1.2">
+                            <span class="p-title">ASSIGNMENT 1.2</span>
+                            <span class="p-meta">WEB</span>
+                        </a>
+                    </div>
+                    <div class="list-row">
+                        <a href="./s1a1/index.html" data-img="https://placehold.co/600x400/888/fff?text=Assignment+1.1">
+                            <span class="p-title">ASSIGNMENT 1.1</span>
+                            <span class="p-meta">WEB</span>
+                        </a>
+                    </div>
 
-        <footer>
-            <span>© IRENE KIM</span>
-            <span>SCROLL TO TOP ↑</span>
-        </footer>
+                </section>
+
+                <footer>
+                    <span>© IRENE KIM</span>
+                    <span>SCROLL ↑</span>
+                </footer>
+            </div>
+        </div>
+
     </div>
 
     <div id="canvas-container"></div>
+
+    <script>
+        const links = document.querySelectorAll('.list-row a');
+        const previewImg = document.getElementById('project-preview');
+
+        links.forEach(link => {
+            link.addEventListener('mouseenter', function() {
+                const imgPath = this.getAttribute('data-img');
+                if (imgPath) {
+                    previewImg.src = imgPath;
+                    previewImg.style.opacity = '1';
+                }
+            });
+
+            link.addEventListener('mouseleave', function() {
+                // Optional: Hide image when not hovering
+                // previewImg.style.opacity = '0';
+            });
+        });
+    </script>
 
 </body>
 </html>
