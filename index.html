@@ -3,95 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Irene Kim — Portfolio</title>
+    <title>Irene Kim — Index</title>
     
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style.css">
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
-    <script src="sketch.js"></script>
+    <script src="./sketch.js"></script>
 </head>
 <body>
 
-    <nav class="hud-top">
-        <div class="brand">IRENE KIM</div>
-        <ul class="menu">
-            <li><a href="#work">Work</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="mailto:youremail@example.com">Contact</a></li>
-        </ul>
-    </nav>
-
-    <main class="container">
+    <div class="wrapper">
         
-        <section class="hero">
-            <h1>
-                CREATIVE<br>
-                TECHNOLOGIST<br>
-                & DESIGNER
-            </h1>
-            <p class="subtitle">Based in [Your Location] — Scroll to explore</p>
+        <header>
+            <div class="top-bar">
+                <span>IRENE KIM</span>
+                <span>DESIGNER & DEVELOPER</span>
+                <span>(2024—2025)</span>
+            </div>
+            
+            <nav class="nav-links">
+                <a href="#projects"><span class="dot">○</span> Projects</a>
+                <a href="#about"><span class="dot">○</span> Info</a>
+                <a href="mailto:youremail@example.com"><span class="dot">○</span> Contact</a>
+            </nav>
+        </header>
+
+        <section class="bio">
+            <p>
+                BORN IN [YEAR]. BASED IN [LOCATION].<br>
+                EXPLORING THE INTERSECTION OF DESIGN, TECHNOLOGY,<br>
+                AND INTERACTIVE MEDIA.
+            </p>
         </section>
 
-        <section id="work" class="work-list">
-            <div class="work-header">
-                <span>SELECTED WORKS</span>
-                <span>ARCHIVE</span>
+        <section id="projects" class="project-list">
+            
+            <div class="list-row">
+                <a href="./s3fp/index.html">
+                    <span class="p-title">SEMESTER 3 FINAL PROJECT</span>
+                    <span class="p-meta">DEV / DESIGN / S3FP</span>
+                </a>
+            </div>
+            <div class="list-row">
+                <a href="./s3a2/index.html">
+                    <span class="p-title">ASSIGNMENT 3.2</span>
+                    <span class="p-meta">EXPERIMENT / S3A2</span>
+                </a>
+            </div>
+            <div class="list-row">
+                <a href="./s3a1/index.html">
+                    <span class="p-title">ASSIGNMENT 3.1</span>
+                    <span class="p-meta">PROTOTYPE / S3A1</span>
+                </a>
             </div>
 
-            <ul class="projects">
-                <li class="project-item">
-                    <a href="./s3fp/index.html">
-                        <span class="p-name">Semester 3 Final</span>
-                        <span class="p-cat">s3fp</span>
-                    </a>
-                </li>
-                <li class="project-item">
-                    <a href="./s3a2/index.html">
-                        <span class="p-name">Assignment 3.2</span>
-                        <span class="p-cat">s3a2</span>
-                    </a>
-                </li>
-                <li class="project-item">
-                    <a href="./s3a1/index.html">
-                        <span class="p-name">Assignment 3.1</span>
-                        <span class="p-cat">s3a1</span>
-                    </a>
-                </li>
+            <div class="separator"></div>
 
-                <li class="project-item">
-                    <a href="./s2fp/index.html">
-                        <span class="p-name">Semester 2 Final</span>
-                        <span class="p-cat">s2fp</span>
-                    </a>
-                </li>
-                <li class="project-item">
-                    <a href="./s2a2/index.html">
-                        <span class="p-name">Assignment 2.2</span>
-                        <span class="p-cat">s2a2</span>
-                    </a>
-                </li>
+            <div class="list-row">
+                <a href="./s2fp/index.html">
+                    <span class="p-title">SEMESTER 2 FINAL PROJECT</span>
+                    <span class="p-meta">DEV / DESIGN / S2FP</span>
+                </a>
+            </div>
+            <div class="list-row">
+                <a href="./s2a2/index.html">
+                    <span class="p-title">ASSIGNMENT 2.2</span>
+                    <span class="p-meta">GRAPHIC / S2A2</span>
+                </a>
+            </div>
 
-                <li class="project-item">
-                    <a href="./s1fp/index.html">
-                        <span class="p-name">Semester 1 Final</span>
-                        <span class="p-cat">s1fp</span>
-                    </a>
-                </li>
-                <li class="project-item">
-                    <a href="./s1a2/index.html">
-                        <span class="p-name">Assignment 1.2</span>
-                        <span class="p-cat">s1a2</span>
-                    </a>
-                </li>
-                <li class="project-item">
-                    <a href="./s1a1/index.html">
-                        <span class="p-name">Assignment 1.1</span>
-                        <span class="p-cat">s1a1</span>
-                    </a>
-                </li>
-            </ul>
+            <div class="separator"></div>
+
+            <div class="list-row">
+                <a href="./s1fp/index.html">
+                    <span class="p-title">SEMESTER 1 FINAL PROJECT</span>
+                    <span class="p-meta">ARCHIVE / S1FP</span>
+                </a>
+            </div>
+            <div class="list-row">
+                <a href="./s1a2/index.html">
+                    <span class="p-title">ASSIGNMENT 1.2</span>
+                    <span class="p-meta">WEB / S1A2</span>
+                </a>
+            </div>
+            <div class="list-row">
+                <a href="./s1a1/index.html">
+                    <span class="p-title">ASSIGNMENT 1.1</span>
+                    <span class="p-meta">WEB / S1A1</span>
+                </a>
+            </div>
+
         </section>
-    </main>
+
+        <footer>
+            <span>© IRENE KIM</span>
+            <span>SCROLL TO TOP ↑</span>
+        </footer>
+    </div>
 
     <div id="canvas-container"></div>
 
