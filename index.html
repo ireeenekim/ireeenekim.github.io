@@ -22,24 +22,23 @@
             </div>
             
             <nav class="nav-links">
+                <a href="#about"><span class="dot">○</span> About</a>
                 <a href="#projects"><span class="dot">○</span> Projects</a>
-                <a href="#about"><span class="dot">○</span> Info</a>
-                <a href="mailto:youremail@example.com"><span class="dot">○</span> Contact</a>
+                <a href="#contact"><span class="dot">○</span> Contact</a>
             </nav>
         </header>
 
-        <div class="main-layout">
-            
-            <div class="col-left">
-                <div class="bio">
-                    <p>
-                        BASED IN PHILADELPHIA.<br>
-                        STUDENT AT UPENN.<br>
-                        EXPLORING THE INTERSECTION OF PSYCHOLOGY, CS,
-                        AND INTERACTIVE MEDIA.
-                    </p>
-                </div>
+        <section id="about" class="bio">
+            <p>
+                BASED IN PHILADELPHIA.<br>
+                STUDENT AT UPENN.<br>
+                EXPLORING THE INTERSECTION OF PSYCHOLOGY, CS,<br>
+                AND INTERACTIVE MEDIA.
+            </p>
+        </section>
 
+        <div class="main-layout">
+            <div class="col-left">
                 <div id="preview-container">
                     <img id="project-preview" src="" alt="Project Preview">
                 </div>
@@ -49,19 +48,19 @@
                 <section id="projects" class="project-list">
                     
                     <div class="list-row">
-                        <a href="./s3fp/index.html" data-img="https://placehold.co/600x400/111/fff?text=S3+Final">
+                        <a href="./s3fp/index.html" data-img="./images/s3fp.png">
                             <span class="p-title">SEMESTER 3 FINAL</span>
                             <span class="p-meta">DEV / DESIGN</span>
                         </a>
                     </div>
                     <div class="list-row">
-                        <a href="./s3a2/index.html" data-img="https://placehold.co/600x400/222/fff?text=Assignment+3.2">
+                        <a href="./s3a2/index.html" data-img="./images/s3a2.png">
                             <span class="p-title">ASSIGNMENT 3.2</span>
                             <span class="p-meta">EXPERIMENT</span>
                         </a>
                     </div>
                     <div class="list-row">
-                        <a href="./s3a1/index.html" data-img="https://placehold.co/600x400/333/fff?text=Assignment+3.1">
+                        <a href="./s3a1/index.html" data-img="./images/s3a1.png">
                             <span class="p-title">ASSIGNMENT 3.1</span>
                             <span class="p-meta">PROTOTYPE</span>
                         </a>
@@ -70,13 +69,13 @@
                     <div class="separator"></div>
 
                     <div class="list-row">
-                        <a href="./s2fp/index.html" data-img="https://placehold.co/600x400/444/fff?text=S2+Final">
+                        <a href="./s2fp/index.html" data-img="./images/s2fp.png">
                             <span class="p-title">SEMESTER 2 FINAL</span>
                             <span class="p-meta">DEV / DESIGN</span>
                         </a>
                     </div>
                     <div class="list-row">
-                        <a href="./s2a2/index.html" data-img="https://placehold.co/600x400/555/fff?text=Assignment+2.2">
+                        <a href="./s2a2/index.html" data-img="./images/s2a2.png">
                             <span class="p-title">ASSIGNMENT 2.2</span>
                             <span class="p-meta">GRAPHIC</span>
                         </a>
@@ -85,32 +84,50 @@
                     <div class="separator"></div>
 
                     <div class="list-row">
-                        <a href="./s1fp/index.html" data-img="https://placehold.co/600x400/666/fff?text=S1+Final">
+                        <a href="./s1fp/index.html" data-img="./images/s1fp.png">
                             <span class="p-title">SEMESTER 1 FINAL</span>
                             <span class="p-meta">ARCHIVE</span>
                         </a>
                     </div>
                     <div class="list-row">
-                        <a href="./s1a2/index.html" data-img="https://placehold.co/600x400/777/fff?text=Assignment+1.2">
+                        <a href="./s1a2/index.html" data-img="./images/s1a2.png">
                             <span class="p-title">ASSIGNMENT 1.2</span>
                             <span class="p-meta">WEB</span>
                         </a>
                     </div>
                     <div class="list-row">
-                        <a href="./s1a1/index.html" data-img="https://placehold.co/600x400/888/fff?text=Assignment+1.1">
+                        <a href="./s1a1/index.html" data-img="./images/s1a1.png">
                             <span class="p-title">ASSIGNMENT 1.1</span>
                             <span class="p-meta">WEB</span>
                         </a>
                     </div>
+                
+                    <div class="separator"></div>
+                
+                    <div class="list-row">
+                        <a href="./reading/index.html"> 
+                            <span class="p-title">READING RESPONSES</span>
+                            <span class="p-meta">WRITING</span>
+                        </a>
+                    </div>
+                    </section>
 
                 </section>
-
-                <footer>
-                    <span>© IRENE KIM</span>
-                    <span>SCROLL ↑</span>
-                </footer>
             </div>
         </div>
+
+        <section id="contact" class="contact-section bio">
+            <div class="separator"></div>
+            <p>
+                INTERESTED IN COLLABORATION?<br>
+                <a href="mailto:kirene@sas.upenn.edu" class="contact-link">KIRENE@SAS.UPENN.EDU ↗</a>
+            </p>
+            
+            <footer>
+                <span>© IRENE KIM</span>
+                <span>SCROLL TO TOP ↑</span>
+            </footer>
+        </section>
 
     </div>
 
@@ -128,10 +145,8 @@
                     previewImg.style.opacity = '1';
                 }
             });
-
             link.addEventListener('mouseleave', function() {
-                // Optional: Hide image when not hovering
-                // previewImg.style.opacity = '0';
+                previewImg.style.opacity = '0';
             });
         });
     </script>
