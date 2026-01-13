@@ -34,15 +34,43 @@
         </section>
 
         <div class="main-layout">
+            
             <div class="col-left">
                 <div id="preview-container">
+                    
                     <img id="project-preview" src="" alt="Project Preview">
+
+                    <div id="wear-preview-container">
+                        <video id="wear-video" loop muted playsinline>
+                            <source src="./images/wear-video.mp4" type="video/mp4">
+                        </video>
+                        
+                        <div class="wear-sub-images">
+                            <img src="./images/wear-1.png" alt="Detail 1">
+                            <img src="./images/wear-2.png" alt="Detail 2">
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
             <div class="col-right">
                 <section id="projects" class="project-list">
                     
+                    <div class="list-row">
+                        <div id="wear-trigger" class="project-item no-click">
+                            <span class="p-title">WHAT SHOULD I WEAR TODAY?</span>
+                            <span class="p-meta">ART OF THE WEB</span>
+                        </div>
+                    </div>
+
+                    <div class="list-row">
+                        <div class="project-item no-click" data-img="./images/propaganda.png">
+                            <span class="p-title">PROPAGANDA FOR THE EVERYDAY</span>
+                            <span class="p-meta">ART OF THE WEB</span>
+                        </div>
+                    </div>
+
                     <div class="list-row">
                         <a href="./s3fp/index.html" target="_blank" data-img="./images/s3fp.png">
                             <span class="p-title">SNAKE GAME</span>
@@ -62,8 +90,6 @@
                         </a>
                     </div>
 
-                    <div class="separator"></div>
-
                     <div class="list-row">
                         <a href="./s2fp/index.html" target="_blank" data-img="./images/s2fp.png">
                             <span class="p-title">CANDLE CLOCK</span>
@@ -77,32 +103,9 @@
                         </a>
                     </div>
 
-                    <div class="separator"></div>
-
                     <div class="list-row">
                         <a href="./s1fp/index.html" target="_blank" data-img="./images/s1fp.png">
                             <span class="p-title">MY PANTRY ESSENTIALS</span>
-                            <span class="p-meta">ART OF THE WEB</span>
-                        </a>
-                    </div>
-                    <div class="list-row">
-                        <a href="./s1a2/index.html" target="_blank" data-img="./images/s1a2.png">
-                            <span class="p-title">CSS STILL LIFE</span>
-                            <span class="p-meta">ART OF THE WEB</span>
-                        </a>
-                    </div>
-                    <div class="list-row">
-                        <a href="./s1a1/index.html" target="_blank" data-img="./images/s1a1.png">
-                            <span class="p-title">ASCII ART</span>
-                            <span class="p-meta">ART OF THE WEB</span>
-                        </a>
-                    </div>
-                
-                    <div class="separator"></div>
-                
-                    <div class="list-row">
-                        <a href="./reading/index.html" target="_blank"> 
-                            <span class="p-title">READING RESPONSES</span>
                             <span class="p-meta">ART OF THE WEB</span>
                         </a>
                     </div>
@@ -128,20 +131,63 @@
     <div id="canvas-container"></div>
 
     <script>
-        const links = document.querySelectorAll('.list-row a');
-        const previewImg = document.getElementById('project-preview');
+        // --- 1. Standard Hover Logic ---
+        const standardLinks = document.querySelectorAll('.list-row a, .project-item[data-img]');
+        const standardPreview = document.getElementById('project-preview');
+        
+        // Special Elements
+        const specialPreview = document.getElementById('wear-preview-container');
+        const wearVideo = document.getElementById('wear-video');
 
-        links.forEach(link => {
+        standardLinks.forEach(link => {
             link.addEventListener('mouseenter', function() {
                 const imgPath = this.getAttribute('data-img');
                 if (imgPath) {
-                    previewImg.src = imgPath;
-                    previewImg.style.opacity = '1';
+                    // Hide Special Preview
+                    specialPreview.style.opacity = '0';
+                    specialPreview.style.display = 'none';
+                    wearVideo.pause(); 
+
+                    // Show Standard Preview
+                    standardPreview.style.display = 'block';
+                    setTimeout(() => {
+                        standardPreview.src = imgPath;
+                        standardPreview.style.opacity = '1';
+                    }, 10);
                 }
             });
+
             link.addEventListener('mouseleave', function() {
-                previewImg.style.opacity = '0';
+                standardPreview.style.opacity = '0';
             });
+        });
+
+
+        // --- 2. Special "Wear" Hover Logic ---
+        const wearTrigger = document.getElementById('wear-trigger');
+
+        wearTrigger.addEventListener('mouseenter', function() {
+            // Hide Standard Preview
+            standardPreview.style.opacity = '0';
+            standardPreview.style.display = 'none';
+
+            // Show Special Preview
+            specialPreview.style.display = 'flex';
+            setTimeout(() => {
+                specialPreview.style.opacity = '1';
+                wearVideo.play(); 
+            }, 10);
+        });
+
+        wearTrigger.addEventListener('mouseleave', function() {
+            // Hide Special Preview
+            specialPreview.style.opacity = '0';
+            
+            setTimeout(() => {
+                specialPreview.style.display = 'none';
+                wearVideo.pause();
+                wearVideo.currentTime = 0; 
+            }, 200);
         });
     </script>
 

@@ -1,3 +1,4 @@
+/* RESET */
 * {
     margin: 0;
     padding: 0;
@@ -24,6 +25,7 @@ html, body {
     z-index: -1; 
 }
 
+/* WRAPPER */
 .wrapper {
     width: 96%;
     max-width: none;
@@ -33,6 +35,7 @@ html, body {
     z-index: 1;
 }
 
+/* HEADER */
 header {
     margin-bottom: 30px;
     width: 100%;
@@ -71,6 +74,7 @@ header {
     margin-right: 5px;
 }
 
+/* BIO SECTION */
 .bio {
     margin-bottom: 20px; 
     font-size: 24px;
@@ -94,6 +98,7 @@ header {
     opacity: 0.7;
 }
 
+/* SPLIT LAYOUT */
 .main-layout {
     display: flex;
     gap: 5%;
@@ -117,15 +122,18 @@ header {
     padding-bottom: 15vh;
 }
 
+/* PREVIEW CONTAINER AREA */
 #preview-container {
     width: 100%;
     height: auto; 
     background: transparent; 
     display: flex;
+    flex-direction: column; /* Allows stacking if needed */
     align-items: flex-start;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
+/* 1. Standard Static Preview Image */
 #project-preview {
     width: 100%;
     height: auto; 
@@ -135,8 +143,44 @@ header {
     box-shadow: 0 25px 50px rgba(0,0,0,0.25); 
     opacity: 0; 
     transition: opacity 0.2s ease-in-out;
+    display: block; /* Default state */
 }
 
+/* 2. Special "Wear" Project Preview Container (Video + 2 Images) */
+#wear-preview-container {
+    display: none; /* Hidden by default */
+    width: 100%;
+    flex-direction: column;
+    gap: 15px; /* Space between video and images */
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+#wear-preview-container video {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+    object-fit: cover;
+}
+
+.wear-sub-images {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 15px;
+}
+
+.wear-sub-images img {
+    /* Calculates width so they fit perfectly side-by-side with the gap */
+    width: calc(50% - 7.5px); 
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+/* PROJECT LIST */
 .project-list {
     display: flex;
     flex-direction: column;
@@ -155,7 +199,14 @@ header {
     width: 100%;
 }
 
-.list-row a {
+/* Remove border from the last item in the list for a clean look */
+.list-row:last-child {
+    border-bottom: none;
+}
+
+/* Unified styles for both Links (<a>) and Divs (.project-item) */
+.list-row a, 
+.list-row .project-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -164,9 +215,17 @@ header {
     text-decoration: none;
     transition: all 0.2s ease;
     font-size: 16px; 
+    width: 100%;
+    cursor: pointer; /* Makes everything feel interactive */
 }
 
-.list-row a:hover {
+/* Specific class for items that shouldn't look clickable */
+.list-row .no-click {
+    cursor: default; 
+}
+
+.list-row a:hover,
+.list-row .project-item:hover {
     color: #000;
     padding-left: 20px;
 }
@@ -188,6 +247,7 @@ header {
     padding-bottom: 40px;
 }
 
+/* FOOTER */
 footer {
     margin-top: 50px;
     display: flex;
@@ -198,12 +258,13 @@ footer {
     width: 100%;
 }
 
+/* MOBILE RESPONSIVE */
 @media (max-width: 768px) {
     .main-layout {
         flex-direction: column;
     }
     .col-left {
-        display: none; 
+        display: none; /* Hides preview column on mobile */
     }
     .col-right {
         width: 100%;
