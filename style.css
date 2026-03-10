@@ -25,6 +25,71 @@ html, body {
     z-index: -1; 
 }
 
+/* Mobile preview overlay */
+#mobile-preview-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+#mobile-preview-overlay.visible {
+    display: flex;
+}
+
+.mobile-preview-content {
+    background: #fafafa;
+    padding: 16px;
+    border-radius: 10px;
+    max-width: 90vw;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+}
+
+.mobile-preview-image {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+}
+
+#mobile-preview-message {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #555;
+}
+
+#mobile-preview-message a {
+    color: inherit;
+    text-decoration: underline;
+}
+
+#mobile-preview-close {
+    align-self: flex-end;
+    border: none;
+    background: none;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0;
+    margin-bottom: 4px;
+}
+
+/* Mobile overlay special previews */
+.mobile-preview-special video {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+    object-fit: cover;
+}
+
 /* WRAPPER */
 .wrapper {
     width: 96%;
@@ -180,6 +245,43 @@ header {
     box-shadow: 0 10px 20px rgba(0,0,0,0.15);
 }
 
+/* 3. Special "Cookbook" Project Preview Container (3-up row + spread) */
+#cookbook-preview-container {
+    display: none; /* Hidden by default */
+    width: 100%;
+    flex-direction: column;
+    gap: 15px;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.cookbook-row-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* don't stretch images to same height */
+    width: 100%;
+    gap: 15px;
+}
+
+.cookbook-row-top img {
+    width: calc((100% - 15px) / 2); /* two images across, same percentage-based sizing as full-width spread logic */
+    height: auto;                   /* preserve each image's original aspect ratio */
+    border-radius: 8px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.cookbook-row-bottom img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.cookbook-row-bottom {
+    margin-top: 15px;
+}
+
 /* PROJECT LIST */
 .project-list {
     display: flex;
@@ -260,13 +362,55 @@ footer {
 
 /* MOBILE RESPONSIVE */
 @media (max-width: 768px) {
+    .wrapper {
+        width: 100%;
+        padding: 16px 16px;
+    }
+
+    .top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        font-size: 12px;
+    }
+
+    .nav-links {
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+
+    .bio {
+        font-size: 18px;
+        margin-bottom: 16px;
+    }
+
     .main-layout {
         flex-direction: column;
+        gap: 24px;
     }
+
     .col-left {
-        display: none; /* Hides preview column on mobile */
+        display: none; /* Hides preview column on mobile for simplicity/perf */
     }
+
     .col-right {
         width: 100%;
+        padding-bottom: 60px;
+    }
+
+    .list-row a,
+    .list-row .project-item {
+        padding: 12px 0;
+        font-size: 14px;
+    }
+
+    .p-meta {
+        font-size: 11px;
+    }
+
+    footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
     }
 }

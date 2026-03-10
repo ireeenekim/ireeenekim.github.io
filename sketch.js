@@ -1,13 +1,18 @@
 let spacing = 25;
+let needsRedraw = true;
 
 function setup() {
   let cnv = createCanvas(windowWidth, windowHeight);
   cnv.parent('canvas-container');
   noStroke();
+  noLoop(); // render only when needed (mouse move / resize)
 }
 
 function draw() {
   clear();
+
+  if (!needsRedraw) return;
+  needsRedraw = false;
 
   for (let x = 0; x < width; x += spacing) {
     for (let y = 0; y < height; y += spacing) {
@@ -22,6 +27,20 @@ function draw() {
   }
 }
 
+function mouseMoved() {
+  needsRedraw = true;
+  redraw();
+  return false;
+}
+
+function touchMoved() {
+  needsRedraw = true;
+  redraw();
+  return false;
+}
+
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
+  needsRedraw = true;
+  redraw();
 }

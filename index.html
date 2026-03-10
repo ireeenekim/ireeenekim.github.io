@@ -7,8 +7,9 @@
     
     <link rel="stylesheet" href="./style.css">
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
-    <script src="./sketch.js"></script>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+    <script defer src="./sketch.js"></script>
 </head>
 <body>
 
@@ -41,13 +42,23 @@
                     <img id="project-preview" src="" alt="Project Preview">
 
                     <div id="wear-preview-container">
-                        <video id="wear-video" loop muted playsinline>
-                            <source src="./images/wear-video.mp4" type="video/mp4">
+                        <video id="wear-video" loop muted playsinline preload="none">
+                            <source data-src="./images/optimized/wear-video-960.mp4" type="video/mp4">
                         </video>
                         
                         <div class="wear-sub-images">
-                            <img src="./images/wear-1.png" alt="Detail 1">
-                            <img src="./images/wear-2.png" alt="Detail 2">
+                            <img src="./images/optimized/wear-1-1200.webp" alt="Detail 1" loading="lazy" decoding="async">
+                            <img src="./images/optimized/wear-2-1200.webp" alt="Detail 2" loading="lazy" decoding="async">
+                        </div>
+                    </div>
+
+                    <div id="cookbook-preview-container">
+                        <div class="cookbook-row-top">
+                            <img src="./images/maangchi.png" alt="Maangchi reference" loading="lazy" decoding="async">
+                            <img src="./images/front.png" alt="Cookbook front cover" loading="lazy" decoding="async">
+                        </div>
+                        <div class="cookbook-row-bottom">
+                            <img src="./images/spread.png" alt="Cookbook interior spread" loading="lazy" decoding="async">
                         </div>
                     </div>
 
@@ -65,7 +76,7 @@
                     </div>
 
                     <div class="list-row">
-                        <div class="project-item no-click" data-img="./images/propaganda.png">
+                        <div class="project-item no-click" data-img="./images/optimized/propaganda-960.webp">
                             <span class="p-title">PROPAGANDA FOR THE EVERYDAY</span>
                             <span class="p-meta">PIXEL TO PRINT</span>
                         </div>
@@ -110,6 +121,20 @@
                         </a>
                     </div>
 
+                    <div class="list-row">
+                        <div id="cookbook-trigger" class="project-item no-click">
+                            <span class="p-title">COOKBOOK REDESIGN</span>
+                            <span class="p-meta">GRAPHIC DESIGN</span>
+                        </div>
+                    </div>
+
+                    <div class="list-row">
+                        <div class="project-item no-click" data-img="./images/twins.png">
+                            <span class="p-title">TWIN</span>
+                            <span class="p-meta">ART, DESIGN, AND DIGITAL CULTURE</span>
+                        </div>
+                    </div>
+
                 </section>
             </div>
         </div>
@@ -130,6 +155,15 @@
 
     <div id="canvas-container"></div>
 
+    <!-- Mobile preview overlay -->
+    <div id="mobile-preview-overlay">
+        <div class="mobile-preview-content">
+            <button id="mobile-preview-close" aria-label="Close preview">×</button>
+            <div id="mobile-preview-body"></div>
+            <p id="mobile-preview-message"></p>
+        </div>
+    </div>
+
     <script>
         // --- 1. Standard Hover Logic ---
         const standardLinks = document.querySelectorAll('.list-row a, .project-item[data-img]');
@@ -138,15 +172,156 @@
         // Special Elements
         const specialPreview = document.getElementById('wear-preview-container');
         const wearVideo = document.getElementById('wear-video');
+        const wearVideoSource = wearVideo.querySelector('source');
+        let wearVideoSrcSet = false;
+        const cookbookPreview = document.getElementById('cookbook-preview-container');
+        const mobileOverlay = document.getElementById('mobile-preview-overlay');
+        const mobilePreviewBody = document.getElementById('mobile-preview-body');
+        const mobilePreviewMessage = document.getElementById('mobile-preview-message');
+        const mobilePreviewClose = document.getElementById('mobile-preview-close');
+
+        const isMobileViewport = () => window.matchMedia('(max-width: 768px)').matches;
+
+        function clearMobilePreview() {
+            if (mobilePreviewBody) mobilePreviewBody.innerHTML = '';
+            if (mobilePreviewMessage) mobilePreviewMessage.textContent = '';
+        }
+
+        function openMobileOverlay() {
+            if (mobileOverlay) mobileOverlay.classList.add('visible');
+        }
+
+        function closeMobileOverlay() {
+            if (mobileOverlay) mobileOverlay.classList.remove('visible');
+            // Stop any video that might be playing in the overlay
+            if (mobilePreviewBody) {
+                mobilePreviewBody.querySelectorAll('video').forEach(v => {
+                    try { v.pause(); } catch {}
+                });
+            }
+        }
+
+        function setMobileMessageForLink(href) {
+            if (!mobilePreviewMessage) return;
+            mobilePreviewMessage.innerHTML = '';
+
+            mobilePreviewMessage.append(document.createTextNode('Click '));
+
+            const a = document.createElement('a');
+            a.href = href;
+            a.target = '_blank';
+            a.rel = 'noopener noreferrer';
+            a.textContent = 'here';
+            mobilePreviewMessage.append(a);
+
+            mobilePreviewMessage.append(document.createTextNode(' to view. Open on desktop for the full experience.'));
+        }
+
+        function renderMobileImage(src, alt = 'Project preview') {
+            if (!mobilePreviewBody) return;
+            const img = document.createElement('img');
+            img.className = 'mobile-preview-image';
+            img.src = src;
+            img.alt = alt;
+            img.loading = 'eager';
+            img.decoding = 'async';
+            mobilePreviewBody.append(img);
+        }
+
+        function renderMobileCookbookPreview() {
+            if (!mobilePreviewBody) return;
+            const container = document.createElement('div');
+            container.className = 'mobile-preview-special cookbook-preview';
+
+            const rowTop = document.createElement('div');
+            rowTop.className = 'cookbook-row-top';
+
+            // Use the same sources as the desktop cookbook preview container
+            const topImgs = cookbookPreview?.querySelectorAll('.cookbook-row-top img');
+            if (topImgs && topImgs.length) {
+                topImgs.forEach(node => {
+                    const img = document.createElement('img');
+                    img.src = node.getAttribute('src') || '';
+                    img.alt = node.getAttribute('alt') || '';
+                    img.loading = 'eager';
+                    img.decoding = 'async';
+                    rowTop.append(img);
+                });
+            }
+
+            const rowBottom = document.createElement('div');
+            rowBottom.className = 'cookbook-row-bottom';
+            const spread = cookbookPreview?.querySelector('.cookbook-row-bottom img');
+            if (spread) {
+                const img = document.createElement('img');
+                img.src = spread.getAttribute('src') || '';
+                img.alt = spread.getAttribute('alt') || '';
+                img.loading = 'eager';
+                img.decoding = 'async';
+                rowBottom.append(img);
+            }
+
+            container.append(rowTop, rowBottom);
+            mobilePreviewBody.append(container);
+        }
+
+        function renderMobileWearPreview() {
+            if (!mobilePreviewBody) return;
+            const container = document.createElement('div');
+            container.className = 'mobile-preview-special wear-preview';
+
+            const video = document.createElement('video');
+            video.loop = true;
+            video.muted = true;
+            video.playsInline = true;
+            video.preload = 'none';
+
+            const source = document.createElement('source');
+            const src = wearVideoSource?.dataset?.src;
+            if (src) source.src = src;
+            source.type = 'video/mp4';
+            video.append(source);
+
+            const subImages = document.createElement('div');
+            subImages.className = 'wear-sub-images';
+
+            const wearImgs = specialPreview?.querySelectorAll('.wear-sub-images img');
+            if (wearImgs && wearImgs.length) {
+                wearImgs.forEach(node => {
+                    const img = document.createElement('img');
+                    img.src = node.getAttribute('src') || '';
+                    img.alt = node.getAttribute('alt') || '';
+                    img.loading = 'eager';
+                    img.decoding = 'async';
+                    subImages.append(img);
+                });
+            }
+
+            container.append(video, subImages);
+            mobilePreviewBody.append(container);
+
+            // Best-effort autoplay (may be blocked, but still shows poster frame)
+            try {
+                video.load();
+                video.play().catch(() => {});
+            } catch {}
+        }
 
         standardLinks.forEach(link => {
+            // Desktop / large-screen hover behavior
             link.addEventListener('mouseenter', function() {
+                if (isMobileViewport()) return;
                 const imgPath = this.getAttribute('data-img');
                 if (imgPath) {
                     // Hide Special Preview
                     specialPreview.style.opacity = '0';
                     specialPreview.style.display = 'none';
                     wearVideo.pause(); 
+
+                    if (cookbookPreview) {
+                        cookbookPreview.style.opacity = '0';
+                        cookbookPreview.style.display = 'none';
+                    }
 
                     // Show Standard Preview
                     standardPreview.style.display = 'block';
@@ -158,23 +333,65 @@
             });
 
             link.addEventListener('mouseleave', function() {
+                if (isMobileViewport()) return;
                 standardPreview.style.opacity = '0';
             });
+
+            // Mobile click behavior (popup)
+            link.addEventListener('click', function (e) {
+                if (!isMobileViewport()) return;
+                const imgPath = this.getAttribute('data-img');
+                if (!imgPath) return;
+
+                e.preventDefault();
+
+                clearMobilePreview();
+                renderMobileImage(imgPath, 'Project preview');
+                openMobileOverlay();
+
+                const isHyperlink = this.tagName.toLowerCase() === 'a';
+                if (isHyperlink) setMobileMessageForLink(this.getAttribute('href') || '#');
+            });
         });
+
+        if (mobilePreviewClose && mobileOverlay) {
+            mobilePreviewClose.addEventListener('click', () => {
+                closeMobileOverlay();
+            });
+        }
+
+        if (mobileOverlay) {
+            mobileOverlay.addEventListener('click', (e) => {
+                if (e.target === mobileOverlay) {
+                    closeMobileOverlay();
+                }
+            });
+        }
 
 
         // --- 2. Special "Wear" Hover Logic ---
         const wearTrigger = document.getElementById('wear-trigger');
+        const cookbookTrigger = document.getElementById('cookbook-trigger');
 
         wearTrigger.addEventListener('mouseenter', function() {
             // Hide Standard Preview
             standardPreview.style.opacity = '0';
             standardPreview.style.display = 'none';
 
+            if (cookbookPreview) {
+                cookbookPreview.style.opacity = '0';
+                cookbookPreview.style.display = 'none';
+            }
+
             // Show Special Preview
             specialPreview.style.display = 'flex';
             setTimeout(() => {
                 specialPreview.style.opacity = '1';
+                if (!wearVideoSrcSet && wearVideoSource?.dataset?.src) {
+                    wearVideoSource.src = wearVideoSource.dataset.src;
+                    wearVideo.load();
+                    wearVideoSrcSet = true;
+                }
                 wearVideo.play(); 
             }, 10);
         });
@@ -189,6 +406,53 @@
                 wearVideo.currentTime = 0; 
             }, 200);
         });
+
+        // --- 3. Special "Cookbook" Hover Logic ---
+        if (cookbookTrigger && cookbookPreview) {
+            cookbookTrigger.addEventListener('mouseenter', function () {
+                // Hide Standard and Wear previews
+                standardPreview.style.opacity = '0';
+                standardPreview.style.display = 'none';
+
+                specialPreview.style.opacity = '0';
+                specialPreview.style.display = 'none';
+                wearVideo.pause();
+
+                // Show Cookbook preview
+                cookbookPreview.style.display = 'flex';
+                setTimeout(() => {
+                    cookbookPreview.style.opacity = '1';
+                }, 10);
+            });
+
+            cookbookTrigger.addEventListener('mouseleave', function () {
+                cookbookPreview.style.opacity = '0';
+                setTimeout(() => {
+                    cookbookPreview.style.display = 'none';
+                }, 200);
+            });
+        }
+
+        // --- 4. Mobile click support for special previews ---
+        if (wearTrigger) {
+            wearTrigger.addEventListener('click', (e) => {
+                if (!isMobileViewport()) return;
+                e.preventDefault();
+                clearMobilePreview();
+                renderMobileWearPreview();
+                openMobileOverlay();
+            });
+        }
+
+        if (cookbookTrigger && cookbookPreview) {
+            cookbookTrigger.addEventListener('click', (e) => {
+                if (!isMobileViewport()) return;
+                e.preventDefault();
+                clearMobilePreview();
+                renderMobileCookbookPreview();
+                openMobileOverlay();
+            });
+        }
     </script>
 
 </body>
