@@ -151,6 +151,13 @@ header {
     max-width: 900px;
 }
 
+.about-note {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 14px;
+    opacity: 0.7;
+}
+
 .contact-link {
     color: #111;
     text-decoration: none;

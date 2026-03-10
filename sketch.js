@@ -36,7 +36,7 @@ function mouseMoved() {
 function touchMoved() {
   needsRedraw = true;
   redraw();
-  return false;
+  // Don't block page scrolling on mobile.
 }
 
 function windowResized() {
