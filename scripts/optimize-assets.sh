@@ -25,6 +25,9 @@ cwebp -quiet -q 90 "$ROOT_DIR/images/propaganda.png" -resize 1600 0 -o "$ROOT_DI
 cwebp -quiet -q 90 "$ROOT_DIR/images/propaganda.png" -resize 960 0  -o "$ROOT_DIR/images/optimized/propaganda-960.webp"
 cwebp -quiet -q 90 "$ROOT_DIR/images/propaganda.png" -resize 480 0  -o "$ROOT_DIR/images/optimized/propaganda-480.webp"
 
+cwebp -quiet -q 88 "$ROOT_DIR/images/twins.png" -resize 1200 0 -o "$ROOT_DIR/images/optimized/twin-1200.webp"
+cwebp -quiet -q 88 "$ROOT_DIR/images/twins.png" -resize 800 0  -o "$ROOT_DIR/images/optimized/twin-800.webp"
+
 ffmpeg -y -i "$ROOT_DIR/images/wear-video.mp4" \
   -c:v libx264 -preset veryfast -crf 28 -pix_fmt yuv420p -movflags +faststart -an \
   -vf "scale='min(960,iw)':-2,fps=30" \
