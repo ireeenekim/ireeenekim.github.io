@@ -53,16 +53,6 @@
                         </div>
                     </div>
 
-                    <div id="cookbook-preview-container">
-                        <div class="cookbook-row-top">
-                            <img src="./images/maangchi.png" alt="Maangchi reference" loading="lazy" decoding="async">
-                            <img src="./images/front.png" alt="Cookbook front cover" loading="lazy" decoding="async">
-                        </div>
-                        <div class="cookbook-row-bottom">
-                            <img src="./images/spread.png" alt="Cookbook interior spread" loading="lazy" decoding="async">
-                        </div>
-                    </div>
-
                     <div id="scorely-preview-container">
                         <img class="scorely-slides" src="./images/optimized/scorely-slides.webp" alt="Scorely slides" loading="lazy" decoding="async">
                         <div class="scorely-bottom-row">
@@ -88,7 +78,7 @@
                     
                     <div class="list-row">
                         <div id="wear-trigger" class="project-item no-click">
-                            <span class="p-title">WHAT SHOULD I WEAR TODAY?</span>
+                            <span class="p-title">WHAT DO I WEAR TODAY?</span>
                             <span class="p-meta">PIXEL TO PRINT</span>
                         </div>
                     </div>
@@ -107,12 +97,6 @@
                         </a>
                     </div>
                     <div class="list-row">
-                        <a href="./s3a2/index.html" target="_blank" data-img="./images/s3a2.png">
-                            <span class="p-title">KILL THE CLOCK</span>
-                            <span class="p-meta">ART OF THE WEB</span>
-                        </a>
-                    </div>
-                    <div class="list-row">
                         <a href="./s3a1/index.html" target="_blank" data-img="./images/s3a1.png">
                             <span class="p-title">FOLLOW THE INSTRUCTIONS</span>
                             <span class="p-meta">ART OF THE WEB</span>
@@ -125,32 +109,12 @@
                             <span class="p-meta">ART OF THE WEB</span>
                         </a>
                     </div>
-                    <div class="list-row">
-                        <a href="./s2a2/index.html" target="_blank" data-img="./images/s2a2.png">
-                            <span class="p-title">GESTALT PRINCIPLES</span>
-                            <span class="p-meta">ART OF THE WEB</span>
-                        </a>
-                    </div>
 
                     <div class="list-row">
                         <a href="./s1fp/index.html" target="_blank" data-img="./images/s1fp.png">
                             <span class="p-title">MY PANTRY ESSENTIALS</span>
                             <span class="p-meta">ART OF THE WEB</span>
                         </a>
-                    </div>
-
-                    <div class="list-row">
-                        <div id="cookbook-trigger" class="project-item no-click">
-                            <span class="p-title">COOKBOOK REDESIGN</span>
-                            <span class="p-meta">GRAPHIC DESIGN</span>
-                        </div>
-                    </div>
-
-                    <div class="list-row">
-                        <div class="project-item no-click" data-img="./images/optimized/twin-1200.webp">
-                            <span class="p-title">TWIN</span>
-                            <span class="p-meta">ART, DESIGN, AND DIGITAL CULTURE</span>
-                        </div>
                     </div>
 
                 </section>
@@ -192,7 +156,6 @@
         const wearVideo = document.getElementById('wear-video');
         const wearVideoSource = wearVideo.querySelector('source');
         let wearVideoSrcSet = false;
-        const cookbookPreview = document.getElementById('cookbook-preview-container');
         const scorelyPreview = document.getElementById('scorely-preview-container');
         const scorelyVideo = document.getElementById('scorely-video');
         const scorelyVideoSource = scorelyVideo?.querySelector('source');
@@ -209,12 +172,6 @@
             specialPreview.style.opacity = '0';
             specialPreview.style.display = 'none';
             if (wearVideo) wearVideo.pause();
-        }
-
-        function hideCookbookPreview() {
-            if (!cookbookPreview) return;
-            cookbookPreview.style.opacity = '0';
-            cookbookPreview.style.display = 'none';
         }
 
         function hideScorelyPreview() {
@@ -276,42 +233,6 @@
             img.loading = 'eager';
             img.decoding = 'async';
             mobilePreviewBody.append(img);
-        }
-
-        function renderMobileCookbookPreview() {
-            if (!mobilePreviewBody) return;
-            const container = document.createElement('div');
-            container.className = 'mobile-preview-special cookbook-preview';
-
-            const rowTop = document.createElement('div');
-            rowTop.className = 'cookbook-row-top';
-
-            const topImgs = cookbookPreview?.querySelectorAll('.cookbook-row-top img');
-            if (topImgs && topImgs.length) {
-                topImgs.forEach(node => {
-                    const img = document.createElement('img');
-                    img.src = node.getAttribute('src') || '';
-                    img.alt = node.getAttribute('alt') || '';
-                    img.loading = 'eager';
-                    img.decoding = 'async';
-                    rowTop.append(img);
-                });
-            }
-
-            const rowBottom = document.createElement('div');
-            rowBottom.className = 'cookbook-row-bottom';
-            const spread = cookbookPreview?.querySelector('.cookbook-row-bottom img');
-            if (spread) {
-                const img = document.createElement('img');
-                img.src = spread.getAttribute('src') || '';
-                img.alt = spread.getAttribute('alt') || '';
-                img.loading = 'eager';
-                img.decoding = 'async';
-                rowBottom.append(img);
-            }
-
-            container.append(rowTop, rowBottom);
-            mobilePreviewBody.append(container);
         }
 
         function renderMobileWearPreview() {
@@ -406,7 +327,6 @@
                 const imgPath = this.getAttribute('data-img');
                 if (imgPath) {
                     hideWearPreview();
-                    hideCookbookPreview();
                     hideScorelyPreview();
 
                     standardPreview.style.display = 'block';
@@ -455,12 +375,10 @@
 
         // --- 2. Special "Wear" Hover Logic ---
         const wearTrigger = document.getElementById('wear-trigger');
-        const cookbookTrigger = document.getElementById('cookbook-trigger');
         const scorelyTrigger = document.getElementById('scorely-trigger');
 
         wearTrigger.addEventListener('mouseenter', function() {
             hideStandardPreview();
-            hideCookbookPreview();
             hideScorelyPreview();
 
             specialPreview.style.display = 'flex';
@@ -485,34 +403,12 @@
             }, 200);
         });
 
-        // --- 3. Special "Cookbook" Hover Logic ---
-        if (cookbookTrigger && cookbookPreview) {
-            cookbookTrigger.addEventListener('mouseenter', function () {
-                hideStandardPreview();
-                hideWearPreview();
-                hideScorelyPreview();
-
-                cookbookPreview.style.display = 'flex';
-                setTimeout(() => {
-                    cookbookPreview.style.opacity = '1';
-                }, 10);
-            });
-
-            cookbookTrigger.addEventListener('mouseleave', function () {
-                cookbookPreview.style.opacity = '0';
-                setTimeout(() => {
-                    cookbookPreview.style.display = 'none';
-                }, 200);
-            });
-        }
-
-        // --- 4. Special "Scorely" Hover Logic ---
+        // --- 3. Special "Scorely" Hover Logic ---
         if (scorelyTrigger && scorelyPreview) {
             scorelyTrigger.addEventListener('mouseenter', function () {
                 if (isMobileViewport()) return;
                 hideStandardPreview();
                 hideWearPreview();
-                hideCookbookPreview();
 
                 scorelyPreview.style.display = 'flex';
                 setTimeout(() => {
@@ -548,23 +444,13 @@
             });
         }
 
-        // --- 5. Mobile click support for Wear / Cookbook ---
+        // --- 4. Mobile click support for Wear ---
         if (wearTrigger) {
             wearTrigger.addEventListener('click', (e) => {
                 if (!isMobileViewport()) return;
                 e.preventDefault();
                 clearMobilePreview();
                 renderMobileWearPreview();
-                openMobileOverlay();
-            });
-        }
-
-        if (cookbookTrigger && cookbookPreview) {
-            cookbookTrigger.addEventListener('click', (e) => {
-                if (!isMobileViewport()) return;
-                e.preventDefault();
-                clearMobilePreview();
-                renderMobileCookbookPreview();
                 openMobileOverlay();
             });
         }
