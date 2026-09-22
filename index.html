@@ -30,7 +30,7 @@
 
         <section id="about" class="bio">
             <p>
-                Hello! My name is Irene Kim and I'm a senior at the University of Pennsylvania studying Psychology and Computer Science with minors in Consumer Psychology and Design. Here's a look into the creative side of my brain :)<br>
+                Hello! My name is Irene Kim and I recently graduated from the University of Pennsylvania where I majored in Psychology and Computer Science with minors in Consumer Psychology and Design. Here's a look into the creative side of my brain :)<br>
                 <span class="about-note">(Give the website a second to load!)</span>
             </p>
         </section>
@@ -63,11 +63,28 @@
                         </div>
                     </div>
 
+                    <div id="scorely-preview-container">
+                        <img class="scorely-slides" src="./images/optimized/scorely-slides.webp" alt="Scorely slides" loading="lazy" decoding="async">
+                        <div class="scorely-bottom-row">
+                            <video id="scorely-video" loop muted playsinline preload="none" poster="./images/optimized/scorely-preview.jpg">
+                                <source data-src="./images/optimized/scorely-preview.mp4" type="video/mp4">
+                            </video>
+                            <img class="scorely-poster" src="./images/optimized/scorely-poster.webp" alt="Scorely poster" loading="lazy" decoding="async">
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
             <div class="col-right">
                 <section id="projects" class="project-list">
+
+                    <div class="list-row">
+                        <a href="./scorely/index.html" target="_blank" id="scorely-trigger">
+                            <span class="p-title">SCORELY</span>
+                            <span class="p-meta">HCI</span>
+                        </a>
+                    </div>
                     
                     <div class="list-row">
                         <div id="wear-trigger" class="project-item no-click">
@@ -167,7 +184,7 @@
 
     <script>
         // --- 1. Standard Hover Logic ---
-        const standardLinks = document.querySelectorAll('.list-row a, .project-item[data-img]');
+        const standardLinks = document.querySelectorAll('.list-row a[data-img], .project-item[data-img]');
         const standardPreview = document.getElementById('project-preview');
         
         // Special Elements
@@ -176,12 +193,45 @@
         const wearVideoSource = wearVideo.querySelector('source');
         let wearVideoSrcSet = false;
         const cookbookPreview = document.getElementById('cookbook-preview-container');
+        const scorelyPreview = document.getElementById('scorely-preview-container');
+        const scorelyVideo = document.getElementById('scorely-video');
+        const scorelyVideoSource = scorelyVideo?.querySelector('source');
+        let scorelyVideoSrcSet = false;
         const mobileOverlay = document.getElementById('mobile-preview-overlay');
         const mobilePreviewBody = document.getElementById('mobile-preview-body');
         const mobilePreviewMessage = document.getElementById('mobile-preview-message');
         const mobilePreviewClose = document.getElementById('mobile-preview-close');
 
         const isMobileViewport = () => window.matchMedia('(max-width: 768px)').matches;
+
+        function hideWearPreview() {
+            if (!specialPreview) return;
+            specialPreview.style.opacity = '0';
+            specialPreview.style.display = 'none';
+            if (wearVideo) wearVideo.pause();
+        }
+
+        function hideCookbookPreview() {
+            if (!cookbookPreview) return;
+            cookbookPreview.style.opacity = '0';
+            cookbookPreview.style.display = 'none';
+        }
+
+        function hideScorelyPreview() {
+            if (!scorelyPreview) return;
+            scorelyPreview.style.opacity = '0';
+            scorelyPreview.style.display = 'none';
+            if (scorelyVideo) {
+                scorelyVideo.pause();
+                try { scorelyVideo.currentTime = 0; } catch {}
+            }
+        }
+
+        function hideStandardPreview() {
+            if (!standardPreview) return;
+            standardPreview.style.opacity = '0';
+            standardPreview.style.display = 'none';
+        }
 
         function clearMobilePreview() {
             if (mobilePreviewBody) mobilePreviewBody.innerHTML = '';
@@ -194,7 +244,6 @@
 
         function closeMobileOverlay() {
             if (mobileOverlay) mobileOverlay.classList.remove('visible');
-            // Stop any video that might be playing in the overlay
             if (mobilePreviewBody) {
                 mobilePreviewBody.querySelectorAll('video').forEach(v => {
                     try { v.pause(); } catch {}
@@ -237,7 +286,6 @@
             const rowTop = document.createElement('div');
             rowTop.className = 'cookbook-row-top';
 
-            // Use the same sources as the desktop cookbook preview container
             const topImgs = cookbookPreview?.querySelectorAll('.cookbook-row-top img');
             if (topImgs && topImgs.length) {
                 topImgs.forEach(node => {
@@ -301,7 +349,51 @@
             container.append(video, subImages);
             mobilePreviewBody.append(container);
 
-            // Best-effort autoplay (may be blocked, but still shows poster frame)
+            try {
+                video.load();
+                video.play().catch(() => {});
+            } catch {}
+        }
+
+        function renderMobileScorelyPreview() {
+            if (!mobilePreviewBody) return;
+            const container = document.createElement('div');
+            container.className = 'mobile-preview-special scorely-preview';
+
+            const slides = document.createElement('img');
+            slides.className = 'scorely-slides';
+            slides.src = './images/optimized/scorely-slides.webp';
+            slides.alt = 'Scorely slides';
+            slides.loading = 'eager';
+            slides.decoding = 'async';
+
+            const bottomRow = document.createElement('div');
+            bottomRow.className = 'scorely-bottom-row';
+
+            const video = document.createElement('video');
+            video.loop = true;
+            video.muted = true;
+            video.playsInline = true;
+            video.preload = 'none';
+            video.poster = './images/optimized/scorely-preview.jpg';
+
+            const source = document.createElement('source');
+            const src = scorelyVideoSource?.dataset?.src;
+            if (src) source.src = src;
+            source.type = 'video/mp4';
+            video.append(source);
+
+            const poster = document.createElement('img');
+            poster.className = 'scorely-poster';
+            poster.src = './images/optimized/scorely-poster.webp';
+            poster.alt = 'Scorely poster';
+            poster.loading = 'eager';
+            poster.decoding = 'async';
+
+            bottomRow.append(video, poster);
+            container.append(slides, bottomRow);
+            mobilePreviewBody.append(container);
+
             try {
                 video.load();
                 video.play().catch(() => {});
@@ -309,22 +401,14 @@
         }
 
         standardLinks.forEach(link => {
-            // Desktop / large-screen hover behavior
             link.addEventListener('mouseenter', function() {
                 if (isMobileViewport()) return;
                 const imgPath = this.getAttribute('data-img');
                 if (imgPath) {
-                    // Hide Special Preview
-                    specialPreview.style.opacity = '0';
-                    specialPreview.style.display = 'none';
-                    wearVideo.pause(); 
+                    hideWearPreview();
+                    hideCookbookPreview();
+                    hideScorelyPreview();
 
-                    if (cookbookPreview) {
-                        cookbookPreview.style.opacity = '0';
-                        cookbookPreview.style.display = 'none';
-                    }
-
-                    // Show Standard Preview
                     standardPreview.style.display = 'block';
                     setTimeout(() => {
                         standardPreview.src = imgPath;
@@ -338,7 +422,6 @@
                 standardPreview.style.opacity = '0';
             });
 
-            // Mobile click behavior (popup)
             link.addEventListener('click', function (e) {
                 if (!isMobileViewport()) return;
                 const imgPath = this.getAttribute('data-img');
@@ -373,18 +456,13 @@
         // --- 2. Special "Wear" Hover Logic ---
         const wearTrigger = document.getElementById('wear-trigger');
         const cookbookTrigger = document.getElementById('cookbook-trigger');
+        const scorelyTrigger = document.getElementById('scorely-trigger');
 
         wearTrigger.addEventListener('mouseenter', function() {
-            // Hide Standard Preview
-            standardPreview.style.opacity = '0';
-            standardPreview.style.display = 'none';
+            hideStandardPreview();
+            hideCookbookPreview();
+            hideScorelyPreview();
 
-            if (cookbookPreview) {
-                cookbookPreview.style.opacity = '0';
-                cookbookPreview.style.display = 'none';
-            }
-
-            // Show Special Preview
             specialPreview.style.display = 'flex';
             setTimeout(() => {
                 specialPreview.style.opacity = '1';
@@ -398,7 +476,6 @@
         });
 
         wearTrigger.addEventListener('mouseleave', function() {
-            // Hide Special Preview
             specialPreview.style.opacity = '0';
             
             setTimeout(() => {
@@ -411,15 +488,10 @@
         // --- 3. Special "Cookbook" Hover Logic ---
         if (cookbookTrigger && cookbookPreview) {
             cookbookTrigger.addEventListener('mouseenter', function () {
-                // Hide Standard and Wear previews
-                standardPreview.style.opacity = '0';
-                standardPreview.style.display = 'none';
+                hideStandardPreview();
+                hideWearPreview();
+                hideScorelyPreview();
 
-                specialPreview.style.opacity = '0';
-                specialPreview.style.display = 'none';
-                wearVideo.pause();
-
-                // Show Cookbook preview
                 cookbookPreview.style.display = 'flex';
                 setTimeout(() => {
                     cookbookPreview.style.opacity = '1';
@@ -434,7 +506,49 @@
             });
         }
 
-        // --- 4. Mobile click support for special previews ---
+        // --- 4. Special "Scorely" Hover Logic ---
+        if (scorelyTrigger && scorelyPreview) {
+            scorelyTrigger.addEventListener('mouseenter', function () {
+                if (isMobileViewport()) return;
+                hideStandardPreview();
+                hideWearPreview();
+                hideCookbookPreview();
+
+                scorelyPreview.style.display = 'flex';
+                setTimeout(() => {
+                    scorelyPreview.style.opacity = '1';
+                    if (!scorelyVideoSrcSet && scorelyVideoSource?.dataset?.src) {
+                        scorelyVideoSource.src = scorelyVideoSource.dataset.src;
+                        scorelyVideo.load();
+                        scorelyVideoSrcSet = true;
+                    }
+                    scorelyVideo.play().catch(() => {});
+                }, 10);
+            });
+
+            scorelyTrigger.addEventListener('mouseleave', function () {
+                if (isMobileViewport()) return;
+                scorelyPreview.style.opacity = '0';
+                setTimeout(() => {
+                    scorelyPreview.style.display = 'none';
+                    if (scorelyVideo) {
+                        scorelyVideo.pause();
+                        try { scorelyVideo.currentTime = 0; } catch {}
+                    }
+                }, 200);
+            });
+
+            scorelyTrigger.addEventListener('click', function (e) {
+                if (!isMobileViewport()) return;
+                e.preventDefault();
+                clearMobilePreview();
+                renderMobileScorelyPreview();
+                setMobileMessageForLink(this.getAttribute('href') || './scorely/index.html');
+                openMobileOverlay();
+            });
+        }
+
+        // --- 5. Mobile click support for Wear / Cookbook ---
         if (wearTrigger) {
             wearTrigger.addEventListener('click', (e) => {
                 if (!isMobileViewport()) return;

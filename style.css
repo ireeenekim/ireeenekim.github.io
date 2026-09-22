@@ -90,6 +90,37 @@ html, body {
     object-fit: cover;
 }
 
+.mobile-preview-special.scorely-preview video {
+    width: calc(50% - 5px);
+    max-width: none;
+    margin: 0;
+    object-fit: contain;
+    background: #111;
+}
+
+.mobile-preview-special .scorely-bottom-row {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    align-items: flex-start;
+}
+
+.mobile-preview-special .scorely-slides {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    background: #fff;
+}
+
+.mobile-preview-special .scorely-poster {
+    width: calc(50% - 5px);
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    background: #fff;
+}
+
 /* WRAPPER */
 .wrapper {
     width: 96%;
@@ -287,6 +318,52 @@ header {
 
 .cookbook-row-bottom {
     margin-top: 15px;
+}
+
+/* 4. Special "Scorely" Project Preview (Slides top, Demo + Poster bottom) */
+#scorely-preview-container {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    gap: 15px;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+#scorely-preview-container .scorely-slides {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    background: #fff;
+    display: block;
+}
+
+.scorely-bottom-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    gap: 15px;
+}
+
+.scorely-bottom-row video {
+    width: calc(50% - 7.5px);
+    height: auto;
+    max-height: 45vh;
+    border-radius: 8px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+    object-fit: contain;
+    background: #111;
+}
+
+.scorely-bottom-row .scorely-poster {
+    width: calc(50% - 7.5px);
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    background: #fff;
 }
 
 /* PROJECT LIST */
